@@ -1,0 +1,9 @@
+{
+  "uuid": "transparent-move@edjenn1998",
+  "name": "Transparent Move",
+  "description": "Make normal application windows partially transparent while moving them, then smoothly restore their original opacity.",
+  "shell-version": ["51"],
+  "version": 1,
+  "settings-schema": "org.gnome.shell.extensions.transparent-move",
+  "url": "https://github.com/edjenn1998/transparent-move"
+}

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: GPL-3.0-or-later -->
+<schemalist>
+  <schema id="org.gnome.shell.extensions.transparent-move" path="/org/gnome/shell/extensions/transparent-move/">
+    <key name="move-opacity" type="i">
+      <range min="10" max="100"/>
+      <default>65</default>
+      <summary>Window opacity while moving</summary>
+      <description>Actual window opacity as a percentage, from 10 (almost transparent) to 100 (opaque). The preferences slider uses increments of 5.</description>
+    </key>
+  </schema>
+</schemalist>

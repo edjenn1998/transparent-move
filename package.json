@@ -1,0 +1,12 @@
+{
+  "name": "transparent-move",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "license": "GPL-3.0-or-later",
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "check": "node --check extension.js && node --check prefs.js && node --check lib/moveController.js && python3 tools/validate.py && npm test",
+    "pack": "python3 tools/package.py"
+  }
+}
