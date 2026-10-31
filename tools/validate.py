@@ -17,7 +17,7 @@ def main():
     metadata = json.loads((ROOT / "metadata.json").read_text())
     assert metadata["uuid"] == "transparent-move@edjenn1998"
     assert metadata["shell-version"] == ["51"]
-    assert metadata["version"] == 1
+    assert "version" not in metadata
     assert metadata["settings-schema"] == SCHEMA_ID
     schema = ET.parse(ROOT / "schemas" / SCHEMA_FILE).getroot().find("schema")
     assert schema.attrib == {"id": SCHEMA_ID, "path": "/org/gnome/shell/extensions/transparent-move/"}
