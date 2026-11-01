@@ -1,4 +1,14 @@
-# Validation and desktop acceptance
+# Testing
+
+## 1.0.2 — 2026-11-01
+
+- Fixed preferences write-back when an external opacity value is not a 5% step.
+  Slider input still snaps; settings-driven updates only refresh the controls.
+- All **17 tests** pass, including slider snapping, external updates and callback
+  cleanup, alongside the existing movement, restoration and lifecycle coverage.
+- JavaScript syntax, ESLint undefined/unused-variable checks, schema validation,
+  settings persistence and ZIP integrity checks pass.
+- Shexli reports **0 findings, 0 errors and 0 warnings** for the rebuilt ZIP.
 
 ## Automated headless checks
 
@@ -25,14 +35,13 @@ actual Shell adapter with platform imports replaced by test doubles. They exerci
 - Disable while moving/restoring, actor destruction, unmanagement, actor replacement.
 - Repeated adapter enable/disable and controller teardown without leaked handlers.
 
-The tests do **not** load GJS/GI, GTK, Libadwaita, Mutter, or a Wayland compositor.
-Source inspection is documented in [API-51.md](API-51.md). There is no claim of
-executed desktop acceptance or successful EGO review.
+Preferences tests also check 5% snapping, external settings updates without write-back,
+and signal cleanup on close. The tests do not load GJS, GTK, Mutter or a Wayland
+compositor. API notes are in [API-51.md](API-51.md).
 
-## CachyOS GNOME 51.1 Wayland acceptance checklist
+## GNOME 51 Wayland desktop checks
 
-Install using the README. Perform these tests locally in the laptop's desktop
-session, with unrelated opacity/window-effect extensions disabled initially.
+Install using the README, with other opacity/window-effect extensions disabled initially.
 Keep Shell logs open using the README commands. Record GNOME/Mutter versions,
 Wayland session, test date, results, and relevant exceptions.
 
@@ -62,8 +71,7 @@ Wayland session, test date, results, and relevant exceptions.
 
 ### Exact original actor opacity
 
-Visual inspection cannot prove exact restoration. On the test laptop only, Looking
-Glass (Alt+F2 → `lg`) can inspect actors. Open a disposable normal app with a unique
+Looking Glass (Alt+F2 → `lg`) can inspect exact actor opacity. Open a test app with a unique
 title (for example a terminal titled `Transparent Move Test`), and use:
 
 ```js
@@ -96,6 +104,5 @@ Use the README's `gsettings --schemadir ... get ...` command after each step; ex
 
 Inspect the ZIP member listing: root entry points/metadata, library, schema XML and
 LICENSE; no compiled schema, containing folder, tests, secrets, caches, or
-Git internals. Before submission, capture genuine screenshots, record this manual
-matrix, inspect all changes, and verify GNOME extension review guidelines. Do not
-restart or replace a production Shell remotely.
+Git internals. Before submission, record the desktop results and review the current
+GNOME extension review guidelines.

@@ -29,7 +29,6 @@ def main():
     with tempfile.TemporaryDirectory(prefix="transparent-move-check-") as temp:
         path = Path(temp)
         (path / SCHEMA_FILE).write_bytes((ROOT / "schemas" / SCHEMA_FILE).read_bytes())
-        subprocess.run(["glib-compile-schemas", "--strict", "--dry-run", str(path)], check=True)
         subprocess.run(["glib-compile-schemas", "--strict", str(path)], check=True)
         env = dict(os.environ, GSETTINGS_SCHEMA_DIR=temp, GSETTINGS_BACKEND="keyfile",
                    XDG_CONFIG_HOME=str(path / "config"))

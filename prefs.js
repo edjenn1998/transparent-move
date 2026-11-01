@@ -40,9 +40,11 @@ export default class TransparentMovePreferences extends ExtensionPreferences {
         const refreshLabel = () => {
             label.label = `${Math.round(adjustment.value)}%`;
         };
+        let updating = false;
         const valueId = adjustment.connect('value-changed', () => {
+            if (updating)
+                return;
             // Gtk.Scale's step increment controls keys, not pointer dragging.
-            // Snap pointer input as well, so every UI value is a 5% step.
             const value = Math.round(adjustment.value / 5) * 5;
             if (adjustment.value !== value) {
                 adjustment.value = value;
@@ -52,7 +54,10 @@ export default class TransparentMovePreferences extends ExtensionPreferences {
             refreshLabel();
         });
         const settingsId = settings.connect('changed::move-opacity', () => {
+            // Reflect external values without snapping them and writing them back.
+            updating = true;
             adjustment.value = settings.get_int('move-opacity');
+            updating = false;
             refreshLabel();
         });
         refreshLabel();

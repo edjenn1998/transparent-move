@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: GPL-3.0-or-later
-"""Build a flat, allowlisted EGO archive with a strictly compiled schema."""
+"""Build the extension ZIP and validate its settings schema."""
 import json
 from pathlib import Path
 import subprocess

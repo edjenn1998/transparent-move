@@ -83,7 +83,7 @@ test('percentages convert to nearest 8-bit opacity and clamp to schema bounds', 
 });
 
 test('GNOME 51 move enums accept pointer, keyboard and unconstrained moves only', () => {
-    // Values from Mutter 51.1 src/meta/meta-enums.h, not invented test enums.
+    // Mutter 51.1 src/meta/meta-enums.h values.
     const grabOp = {MOVING: 1, MOVING_UNCONSTRAINED: 0x401, KEYBOARD_MOVING: 0x101};
     for (const move of [1, 0x401, 0x101, 0x501])
         assert.equal(isMoveOperation(move, grabOp), true);

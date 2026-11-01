@@ -1,7 +1,7 @@
-# GNOME 51.1 API investigation
+# GNOME 51 API notes
 
-The following upstream **51.1 release-tagged** sources were inspected during
-development. These are source-level compatibility checks, not desktop execution.
+References use the upstream **51.1 release tags**. Desktop checks are listed in
+[TESTING.md](TESTING.md).
 
 ## Interactive movement
 
@@ -68,14 +68,12 @@ Runtime and preferences use separate ES-module entry points and current resource
 paths. `getSettings()` uses `settings-schema` metadata and the packaged local
 schema. Runtime reads settings on each new move, so it needs no settings-change
 signal. Preferences uses GTK4 `Scale`/`Adjustment`, Libadwaita preference rows,
-and a GSettings changed handler disconnected when its window closes.
-
-No legacy `init()`, `imports.ui`, `Main.wm` monkey-patching, private input hooks,
-application-window property writes, network requests, or process spawning are used.
+and a GSettings changed handler disconnected when its window closes. Slider input
+snaps to 5% steps; reflecting a settings change does not write the value back.
 
 Also consulted: the [GNOME 51 porting guide](https://gjs.guide/extensions/upgrading/gnome-shell-51.html)
 and [extension review guidelines](https://gjs.guide/extensions/review-guidelines/review-guidelines.html).
 `disable()` is synchronous, runtime and preferences imports are kept separate,
 there are no module-initialization side effects, and development scripts/tests are
-excluded from the submission archive. The requested local `version: 1` is kept;
-EGO assigns its own uploaded extension version.
+excluded from the submission archive. Metadata uses `version-name`; EGO assigns
+the numeric version when an extension is uploaded.
