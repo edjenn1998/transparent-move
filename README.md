@@ -207,10 +207,11 @@ python3 -m zipfile -t dist/transparent-move@edjenn1998.shell-extension.zip
 ```
 
 The allowlisted ZIP puts `metadata.json`, `extension.js`, and `prefs.js` at its
-root, with `lib/`, schema XML/compiled schema, README, and GPL license. It has no
+root, with `lib/`, schema XML, and GPL license. It has no
 enclosing project directory, tests, development tools, `.git`, caches, or local
 configuration. The helper compiles the schema strictly and checks archive members
-and integrity. Archives and compiled schemas are ignored by Git.
+and integrity. GNOME's installer compiles the XML on installation; compiled
+schemas are not bundled. Archives and compiled schemas are ignored by Git.
 
 After laptop testing, submit this ZIP yourself at
 <https://extensions.gnome.org/upload/>. This project does not automatically submit

@@ -95,7 +95,7 @@ Use the README's `gsettings --schemadir ... get ...` command after each step; ex
 ### Packaging and review
 
 Inspect the ZIP member listing: root entry points/metadata, library, schema XML and
-compiled schema, README, LICENSE; no containing folder, tests, secrets, caches, or
+LICENSE; no compiled schema, containing folder, tests, secrets, caches, or
 Git internals. Before submission, capture genuine screenshots, record this manual
 matrix, inspect all changes, and verify GNOME extension review guidelines. Do not
 restart or replace a production Shell remotely.

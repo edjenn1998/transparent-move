@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SCHEMA = "org.gnome.shell.extensions.transparent-move.gschema.xml"
 FILES = (
     "extension.js", "prefs.js", "metadata.json", "lib/moveController.js",
-    f"schemas/{SCHEMA}", "README.md", "LICENSE",
+    f"schemas/{SCHEMA}", "LICENSE",
 )
 
 
@@ -26,10 +26,9 @@ def main():
         with zipfile.ZipFile(output, "w", zipfile.ZIP_DEFLATED) as archive:
             for name in FILES:
                 archive.write(ROOT / name, name)
-            archive.write(schema_dir / "gschemas.compiled", "schemas/gschemas.compiled")
     with zipfile.ZipFile(output) as archive:
         assert archive.testzip() is None
-        assert set(archive.namelist()) == set(FILES) | {"schemas/gschemas.compiled"}
+        assert set(archive.namelist()) == set(FILES)
     print(f"Created and verified {output}")
 
 
