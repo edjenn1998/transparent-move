@@ -6,6 +6,14 @@ import {Extension} from 'resource:///org/gnome/shell/extensions/extension.js';
 
 import {isMoveOperation, MoveController} from './lib/moveController.js';
 
+const RESIZE_OPS = [
+    Meta.GrabOp.RESIZING_W, Meta.GrabOp.RESIZING_E,
+    Meta.GrabOp.RESIZING_N, Meta.GrabOp.RESIZING_S,
+    Meta.GrabOp.RESIZING_NW, Meta.GrabOp.RESIZING_NE,
+    Meta.GrabOp.RESIZING_SE, Meta.GrabOp.RESIZING_SW,
+];
+
+
 export default class TransparentMove extends Extension {
     enable() {
         this._settings = this.getSettings();
@@ -20,7 +28,8 @@ export default class TransparentMove extends Extension {
             setOpacity: (actor, opacity) => {
                 // Do not inherit another caller's implicit easing state.
                 actor.save_easing_state();
-                actor.set_easing_duration(0);
+                actor.set_easing_duration(120);
+                actor.set_easing_mode(Clutter.AnimationMode.EASE_OUT_QUAD);
                 actor.opacity = opacity;
                 actor.restore_easing_state();
             },
@@ -28,7 +37,8 @@ export default class TransparentMove extends Extension {
 
         this._beginId = global.display.connect('grab-op-begin',
             (_display, window, operation, _sprite) => {
-                if (!isMoveOperation(operation, Meta.GrabOp) ||
+                if (!(isMoveOperation(operation, Meta.GrabOp) ||
+                      RESIZE_OPS.includes(operation)) ||
                     window.get_window_type() !== Meta.WindowType.NORMAL)
                     return;
 
